@@ -1,0 +1,18 @@
+# version: '3.8'    (na versão 2 do compose, esta linha é opcional)
+
+services:
+  postgres:
+    container_name: kube-news-db
+    image: postgres:14.18
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=Pg123
+      - POSTGRES_USER=kubenews
+      - POSTGRES_DB=kubenews
+    volumes:
+      - postgres-docker-volume:/var/lib/postgresql/data
+
+volumes:
+  postgres-docker-volume:
+    name: postgre-kubenews-db
