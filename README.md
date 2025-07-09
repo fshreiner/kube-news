@@ -124,4 +124,3 @@ O projeto utiliza um único modelo `Post` com os seguintes campos:
 | publishDate | Date | Data de publicação |
 
 
-# teste
