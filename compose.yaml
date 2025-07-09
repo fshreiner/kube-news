@@ -1,5 +1,3 @@
-# version: '3.8'    (na versão 2 do compose, esta linha é opcional)
-
 services:
   postgres:
     container_name: kube-news-db
