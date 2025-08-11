@@ -1,6 +1,6 @@
 # Kube-News
 
-Uma aplicação para site de notícias desenvolvida por Fabrício Veronez no curso Formação Devops PRO 2.0, feita em NodeJS para demonstrar o uso de containers.
+Uma aplicação para site de notícias desenvolvida por [https://github.com/fabricioveronez](Fabrício Veronez) no curso [https://curso.devopspro.com.br/devops-pro/](Formação Devops PRO 2.0), feita em NodeJS para demonstrar o uso de containers.
 
 ## 📋 Sobre o Projeto
 
