@@ -5,6 +5,7 @@ Uma aplicação para site de notícias desenvolvida por [Fabrício Veronez](http
 ## 📋 Sobre o Projeto
 
 O projeto Kube-News é uma aplicação web simples desenvolvida em Node.js, projetada como exemplo para demonstrar o uso de contêineres. É um portal de notícias que permite criar, visualizar e gerenciar artigos através de uma interface web. 
+
 Toda estrutura do site foi disponibilizada para os alunos do curso Formação Devops PRO 2.0, e o objetivo proposto foi criarmos toda infraestrutura para hospedar o site utilizando o Docker como base.
 
 ### 🚀 Funcionalidades Principais
