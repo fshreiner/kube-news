@@ -1,9 +1,7 @@
+# Serviço do banco de dados PostgreSQL (v14.18), responsável por armazenar os dados da aplicação.
 services:
   postgres:
-    container_name: kubenews-db
     image: postgres:14.18
-    ports:
-      - 5432:5432
     restart: on-failure
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -13,22 +11,20 @@ services:
       - postgres-docker-volume:/var/lib/postgresql/data
     networks:
       - kubenews-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
+# Serviço da aplicação Kubenews, que depende do PostgreSQL e expõe o serviço na porta 8080.
   kubenews:
-    container_name: kubenews-app
-    image: fshreiner21/kube-news:${KUBENEWS_TAG:-latest}
     build:
       context: ./src
       dockerfile: Dockerfile
     ports:
       - 8080:8080
     restart: on-failure
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"] #revisar, está constando unhealth a todo tempo
-      interval: 30s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
     memswap_limit: 2G
     deploy:
      resources:
@@ -44,11 +40,19 @@ services:
       - DB_HOST=postgres
     networks:
       - kubenews-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
+# Volume Docker para persistência dos dados do PostgreSQL, garantindo que não sejam perdidos em reinícios.
 volumes:
   postgres-docker-volume:
     name: postgre-kubenews-db
 
+# Rede bridge personalizada para comunicação interna entre os serviços da aplicação.
 networks:
   kubenews-network:
     name: kubenews-network
